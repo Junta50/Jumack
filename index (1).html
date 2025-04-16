@@ -1,0 +1,1931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <img src="download (1).jpeg"width="100"height="50"
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jumack</title>
+  <h2>Welcome to jumack project which established from xplus brain</h2>
+  <h3>sign account now on jumack site</h3>
+  <img src="istockphoto-1358014313-612x612.jpg"width="200"height="200"
+  <style>
+    body { font-family: sans-serif; max-width: 500px; margin: auto; padding: 20px; }
+    h2 { text-align: center; }
+    .form-group { margin-bottom: 15px; }
+    label { display: block; margin-bottom: 5px; }
+    input[type="text"], input[type="email"], input[type="password"], input[type="file"] {
+      width: 100%; padding: 8px;
+    }
+    button { padding: 10px 15px; margin-top: 10px; }
+    #profile, #logoutBtn { display: none; }
+    img.avatar { width: 100px; height: 100px; object-fit: cover; border-radius: 50%; }
+  </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Theme Toggle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Light / Dark Mode</h1>
+    <label class="switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+<script>
+const toggle = document.getElementById('theme-toggle');
+
+// Load theme from localStorage or system preference
+function loadTheme() {
+  const savedTheme = localStorage.getItem('theme');
+  const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+    document.body.classList.add('dark');
+    toggle.checked = true;
+  } else {
+    document.body.classList.add('light');
+    toggle.checked = false;
+  }
+}
+
+// Toggle and save theme
+toggle.addEventListener('change', () => {
+  if (toggle.checked) {
+    document.body.classList.replace('light', 'dark');
+    localStorage.setItem('theme', 'dark');
+  } else {
+    document.body.classList.replace('dark', 'light');
+    localStorage.setItem('theme', 'light');
+  }
+});
+
+loadTheme();
+
+</script>
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+/* Toggle Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Light Theme */
+body.light {
+  background: #f0f0f0;
+  color: #111;
+}
+
+/* Dark Theme */
+body.dark {
+  background: #111;
+  color: #f0f0f0;
+}
+
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Counter</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Word and Character Counter</h1>
+    <textarea id="textInput" placeholder="Type something here..." rows="10" cols="30"></textarea>
+    
+    <div class="counter-info">
+      <p>Words: <span id="wordCount">0</span></p>
+      <p>Characters: <span id="charCount">0</span></p>
+      <p>Average Word Length: <span id="avgWordLength">0</span></p>
+      <p>Characters Remaining: <span id="charRemaining">1000</span></p>
+    </div>
+    
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<script>
+const textInput = document.getElementById('textInput');
+const wordCountDisplay = document.getElementById('wordCount');
+const charCountDisplay = document.getElementById('charCount');
+const avgWordLengthDisplay = document.getElementById('avgWordLength');
+const charRemainingDisplay = document.getElementById('charRemaining');
+const resetBtn = document.getElementById('resetBtn');
+
+const maxCharLimit = 1000; // Maximum character limit
+
+textInput.addEventListener('input', () => {
+  const text = textInput.value.trim();
+
+  // Count words
+  const words = text.split(/\s+/).filter(word => word.length > 0);
+  const wordCount = words.length;
+
+  // Count characters
+  const charCount = text.replace(/\s/g, '').length; // Remove spaces for character count
+
+  // Calculate average word length
+  const avgWordLength = wordCount > 0 ? (charCount / wordCount).toFixed(2) : 0;
+
+  // Calculate remaining characters
+  const charRemaining = maxCharLimit - charCount;
+
+  // Update display
+  wordCountDisplay.textContent = wordCount;
+  charCountDisplay.textContent = charCount;
+  avgWordLengthDisplay.textContent = avgWordLength;
+  charRemainingDisplay.textContent = charRemaining > 0 ? charRemaining : 0; // Prevent negative numbers
+});
+
+// Reset the counter and textarea
+resetBtn.addEventListener('click', () => {
+  textInput.value = ''; // Clear the textarea
+  wordCountDisplay.textContent = 0;
+  charCountDisplay.textContent = 0;
+  avgWordLengthDisplay.textContent = 0;
+  charRemainingDisplay.textContent = maxCharLimit;
+});
+
+</script>
+
+  <h2>User registration</h2>
+
+  <div id="authForms">
+    <!-- Sign Up Form -->
+    <form id="signupForm">
+      <h3>Sign Up</h3>
+      <div class="form-group">
+        <label>Email</label><input type="email" id="signupEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label><input type="password" id="signupPassword" required>
+      </div>
+      <div class="form-group">
+        <label>Bio</label><input type="text" id="signupBio">
+      </div>
+      <div class="form-group">
+        <label>Avatar</label><input type="file" id="signupAvatar" accept="image/*">
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <!-- Log In Form -->
+    <form id="loginForm">
+      <h3>Log In</h3>
+      <div class="form-group">
+        <label>Email</label><input type="email" id="loginEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label><input type="password" id="loginPassword" required>
+      </div>
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+
+  <!-- Profile -->
+  <div id="profile">
+    <h3>Welcome, <span id="profileEmail"></span></h3>
+    <img id="profileAvatar" class="avatar" src="" alt="Avatar" />
+    <p><strong>Bio:</strong> <span id="profileBio"></span></p>
+    <body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            margin: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        #bmiResult {
+            font-size: 1.5em;
+            margin-top: 20px;
+        }
+        #category {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        #tips {
+            font-size: 1em;
+            margin-top: 20px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #chatbox {
+            width: 80%;
+            max-width: 600px;
+            height: 400px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .user-message, .bot-message {
+            display: inline-block;
+            max-width: 70%;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            font-size: 1em;
+            word-wrap: break-word;
+        }
+        .user-message {
+            background-color: #cce5ff;
+            align-self: flex-end;
+            text-align: right;
+        }
+        .bot-message {
+            background-color: #e2e3e5;
+            align-self: flex-start;
+            text-align: left;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            width: 70%;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .action-button {
+            padding: 10px;
+            margin: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Routine Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>My Daily Routine Planner</h1>
+    
+    <form id="routineForm">
+      <input type="time" id="time" required>
+      <input type="text" id="activity" placeholder="Activity" required>
+      <button type="submit">Add Activity</button>
+    </form>
+
+    <ul id="routineList">
+      <!-- Activities will appear here -->
+    </ul>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<script>
+const form = document.getElementById("routineForm");
+const timeInput = document.getElementById("time");
+const activityInput = document.getElementById("activity");
+const routineList = document.getElementById("routineList");
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  
+  const time = timeInput.value;
+  const activity = activityInput.value;
+
+  if (time && activity) {
+    addActivity(time, activity);
+    timeInput.value = "";
+    activityInput.value = "";
+  }
+});
+
+function addActivity(time, activity) {
+  const li = document.createElement("li");
+  li.innerHTML = `
+    <span class="time">${time}</span>
+    <span class="activity">${activity}</span>
+    <button onclick="removeActivity(this)">Delete</button>
+  `;
+  routineList.appendChild(li);
+}
+
+function removeActivity(button) {
+  const li = button.parentElement;
+  li.remove();
+}
+
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Posts</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>User Account</h1>
+
+        <!-- Post Creation Form -->
+        <div class="post-form">
+            <textarea id="postText" placeholder="What's on your mind?"></textarea>
+            <input type="file" id="postImage" accept="image/*">
+            <button onclick="createPost()">Post</button>
+        </div>
+
+        <!-- Posts Section -->
+        <div id="postsList" class="posts-list">
+            <h2>Your Posts</h2>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<script>
+let posts = [];
+
+function createPost() {
+    const postText = document.getElementById("postText").value;
+    const postImage = document.getElementById("postImage").files[0];
+
+    if (!postText && !postImage) {
+        alert("Please add some text or an image for your post.");
+        return;
+    }
+
+    const post = {
+        id: Date.now(),
+        text: postText,
+        image: postImage ? URL.createObjectURL(postImage) : null,
+        likes: 0,
+        comments: [],
+    };
+
+    posts.push(post);
+    displayPosts();
+    clearForm();
+}
+
+function displayPosts() {
+    const postsList = document.getElementById("postsList");
+    postsList.innerHTML = "<h2>Your Posts</h2>";
+
+    posts.forEach(post => {
+        const postElement = document.createElement("div");
+        postElement.classList.add("post");
+        postElement.innerHTML = `
+            <p>${post.text}</p>
+            ${post.image ? `<img src="${post.image}" alt="Post Image">` : ""}
+            <div class="post-actions">
+                <button class="like" onclick="likePost(${post.id})">Like (${post.likes})</button>
+                <button class="edit" onclick="editPost(${post.id})">Edit</button>
+                <button class="delete" onclick="deletePost(${post.id})">Delete</button>
+            </div>
+            <div class="comments">
+                <h3>Comments</h3>
+                <div id="comments-${post.id}">
+                    ${post.comments.map(comment => `<div class="comment"><p>${comment}</p></div>`).join('')}
+                </div>
+                <textarea id="commentText-${post.id}" placeholder="Write a comment..."></textarea>
+                <button onclick="addComment(${post.id})">Add Comment</button>
+            </div>
+        `;
+        postsList.appendChild(postElement);
+    });
+}
+
+function deletePost(postId) {
+    posts = posts.filter(post => post.id !== postId);
+    displayPosts();
+}
+
+function editPost(postId) {
+    const post = posts.find(post => post.id === postId);
+    const newText = prompt("Edit your post:", post.text);
+
+    if (newText !== null) {
+        post.text = newText;
+        displayPosts();
+    }
+}
+
+function likePost(postId) {
+    const post = posts.find(post => post.id === postId);
+    post.likes++;
+    displayPosts();
+}
+
+function addComment(postId) {
+    const commentText = document.getElementById(`commentText-${postId}`).value;
+    if (commentText.trim()) {
+        const post = posts.find(post => post.id === postId);
+        post.comments.push(commentText);
+        displayPosts();
+    }
+}
+
+function clearForm() {
+    document.getElementById("postText").value = "";
+    document.getElementById("postImage").value = "";
+}
+
+</script>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.post-form {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-form textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+.post-form input {
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.posts-list {
+    margin-top: 20px;
+}
+
+.post {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post img {
+    max-width: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.post-actions {
+    margin-top: 10px;
+}
+
+.post-actions button {
+    padding: 5px 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.post-actions button.delete {
+    background-color: #dc3545;
+}
+
+.post-actions button.like {
+    background-color: #007bff;
+}
+
+.post-actions button:hover {
+    opacity: 0.8;
+}
+
+.comments {
+    margin-top: 15px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.comment {
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.comment textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.comment button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.comment button:hover {
+    background-color: #0056b3;
+}
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ju_Math Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="calculator">
+    <h1>Advanced Math Calculator</h1>
+    <input type="text" id="display" disabled>
+    
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="appendToDisplay('(')">(</button>
+      <button onclick="appendToDisplay(')')">)</button>
+      <button onclick="appendToDisplay('/')">/</button>
+      
+      <button onclick="appendToDisplay('7')">7</button>
+      <button onclick="appendToDisplay('8')">8</button>
+      <button onclick="appendToDisplay('9')">9</button>
+      <button onclick="appendToDisplay('*')">*</button>
+      
+      <button onclick="appendToDisplay('4')">4</button>
+      <button onclick="appendToDisplay('5')">5</button>
+      <button onclick="appendToDisplay('6')">6</button>
+      <button onclick="appendToDisplay('-')">-</button>
+      
+      <button onclick="appendToDisplay('1')">1</button>
+      <button onclick="appendToDisplay('2')">2</button>
+      <button onclick="appendToDisplay('3')">3</button>
+      <button onclick="appendToDisplay('+')">+</button>
+      
+      <button onclick="appendToDisplay('0')">0</button>
+      <button onclick="appendToDisplay('.')">.</button>
+      <button onclick="calculateResult()">=</button>
+      <button onclick="appendToDisplay('**')">^</button>
+      
+      <button onclick="appendToDisplay('Math.sqrt(')">√</button>
+      <button onclick="appendToDisplay('Math.sin(')">sin</button>
+      <button onclick="appendToDisplay('Math.cos(')">cos</button>
+      <button onclick="appendToDisplay('Math.tan(')">tan</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<script>
+// Function to append input to the display
+function appendToDisplay(value) {
+  document.getElementById("display").value += value;
+}
+
+// Function to clear the display
+function clearDisplay() {
+  document.getElementById("display").value = '';
+}
+
+// Function to calculate the result
+function calculateResult() {
+  const display = document.getElementById("display");
+  try {
+    // Evaluate the expression and update the display with the result
+    display.value = eval(display.value);
+  } catch (error) {
+    display.value = 'Error';
+  }
+}
+
+</script>
+</body>
+</html>
+
+    <h1>Jumack_Chatbot_v.01.05</h1>
+    <img src="Leonardo_Phoenix_09_A_futuristic_intricately_designed_artifici_2.jpg"width="200"height="150"
+    <div id="chatbox"></div>
+    
+    <input type="text" id="userInput" placeholder="Ask me something..." />
+    <button onclick="sendMessage()">Send</button>
+
+    <div id="buttonContainer" class="button-container"></div>
+
+    <script>
+        let userName = "";
+        let language = "en"; // Default to English
+        const userMessageHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
+        const userPreferences = JSON.parse(localStorage.getItem("userPreferences")) || {};
+
+        // Display previous chat history
+        function displayChatHistory() {
+            const chatbox = document.getElementById("chatbox");
+            userMessageHistory.forEach(msg => {
+                displayMessage(msg.text, msg.sender);
+            });
+        }
+
+        // Display a message in the chatbox
+        function displayMessage(message, sender) {
+            const chatbox = document.getElementById("chatbox");
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatbox.appendChild(messageDiv);
+        }
+
+        // Send message to bot
+        function sendMessage() {
+            const userInput = document.getElementById("userInput").value;
+            if (userInput.trim() === "") {
+                return;
+            }
+
+            // Display user message
+            displayMessage(userInput, 'user');
+
+            // Save user message in history
+            userMessageHistory.push({ text: userInput, sender: 'user' });
+            localStorage.setItem("chatHistory", JSON.stringify(userMessageHistory));
+
+            // Clear the input field
+            document.getElementById("userInput").value = "";
+
+            // Get bot's response
+            const botResponse = getBotResponse(userInput);
+
+            // Display bot response
+            displayMessage(botResponse, 'bot');
+
+            // Save bot response in history
+            userMessageHistory.push({ text: botResponse, sender: 'bot' });
+            localStorage.setItem("chatHistory", JSON.stringify(userMessageHistory));
+
+            // Scroll to the bottom of the chatbox
+            const chatbox = document.getElementById("chatbox");
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            // Read aloud response (using SpeechSynthesis)
+            speakResponse(botResponse);
+        }
+
+        // Get bot's response based on input
+        function getBotResponse(input) {
+            input = input.toLowerCase();
+
+            // Basic greeting based on time of day
+            const currentTime = new Date().getHours();
+            let greeting = "Hello!";
+            if (currentTime < 12) greeting = "Good morning!";
+            else if (currentTime < 18) greeting = "Good afternoon!";
+            else greeting = "Good evening!";
+
+            // Respond to greetings
+            if (input.includes("hello") || input.includes("hi")) {
+                return userName ? `${greeting} How can I help you today, ${userName}?` : `${greeting} What's your name?`;
+            }
+
+            // Asking for user’s name
+            if (input.includes("my name is") && !userName) {
+                userName = input.split("my name is")[1].trim();
+                return `${greeting} Nice to meet you, ${userName}! How can I assist you today?`;
+            }
+
+            // Add personalized responses for preferred color or food
+            if (input.includes("my favorite color is") && userName) {
+                const color = input.split("my favorite color is")[1].trim();
+                userPreferences.color = color;
+                localStorage.setItem("userPreferences", JSON.stringify(userPreferences));
+                return `Got it, ${userName}! I'll remember that your favorite color is ${color}.`;
+            }
+
+            if (input.includes("my favorite food is") && userName) {
+                const food = input.split("my favorite food is")[1].trim();
+                userPreferences.food = food;
+                localStorage.setItem("userPreferences", JSON.stringify(userPreferences));
+                return `Yum! I'll remember that your favorite food is ${food}.`;
+            }
+
+            // Jokes, facts, or daily quote
+            const randomResponses = [
+                "I'm a simple chatbot, but I try my best!",
+                "Did you know? I'm constantly learning new things.",
+                "Tell me more about yourself, I'd love to know!"
+            ];
+
+            if (input.includes("joke")) {
+                return generateJoke();
+            } else if (input.includes("quote")) {
+                return generateQuote();
+            }
+
+            // Check weather
+            if (input.includes("weather")) {
+                return getWeather();
+            }
+
+            return randomResponses[Math.floor(Math.random() * randomResponses.length)];
+        }
+
+        // Function to generate a joke
+        function generateJoke() {
+            const jokes = [
+                "Why don't skeletons fight each other? They don't have the guts!",
+                "Why did the scarecrow win an award? Because he was outstanding in his field!",
+                "What do you call fake spaghetti? An impasta!"
+            ];
+            return jokes[Math.floor(Math.random() * jokes.length)];
+        }
+
+        // Function to generate a daily quote
+        function generateQuote() {
+            const quotes = [
+                "The only way to do great work is to love what you do. - Steve Jobs",
+                "Believe you can and you're halfway there. - Theodore Roosevelt",
+                "Act as if what you do makes a difference. It does. - William James"
+            ];
+            return quotes[Math.floor(Math.random() * quotes.length)];
+        }
+
+        // Fetch weather data from OpenWeatherMap API (Use your own API key)
+        async function getWeather() {
+            const apiKey = "YOUR_API_KEY"; // Replace with your own API key
+            const city = "London";
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+
+            const response = await fetch(url);
+            const data = await response.json();
+            const weather = `The current weather in ${city} is ${data.weather[0].description}, with a temperature of ${data.main.temp}°C.`;
+            return weather;
+        }
+
+        // Function to speak the bot's response using the SpeechSynthesis API
+        function speakResponse(response) {
+            const utterance = new SpeechSynthesisUtterance(response);
+            window.speechSynthesis.speak(utterance);
+        }
+
+        // Initialize chat history and greeting
+        displayChatHistory();
+    </script>
+</body>
+</html>
+
+    <h1>jumack bot BMI Calculator</h1>
+    <img src="Leonardo_Phoenix_10_A_forlorn_robot_slumped_in_a_seated_positi_1.jpg"width="100"height="70"
+    <!-- Input Fields for Height and Weight -->
+    <label for="weight">Weight (kg): </label>
+    <input type="number" id="weight" placeholder="Enter your weight" required><br><br>
+
+    <label for="height">Height (cm): </label>
+    <input type="number" id="height" placeholder="Enter your height" required><br><br>
+
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <button onclick="resetFields()">Reset</button><br><br>
+
+    <!-- Display the BMI Result -->
+    <div id="bmiResult"></div>
+    <div id="category"></div>
+    <div id="tips"></div>
+
+    <script>
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const height = parseFloat(document.getElementById("height").value);
+
+            // Input validation
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                alert("Please enter valid positive numbers for both weight and height.");
+                return;
+            }
+
+            // Convert height from cm to meters
+            const heightInMeters = height / 100;
+
+            // Calculate BMI
+            const bmi = weight / (heightInMeters * heightInMeters);
+
+            // Determine BMI category and tips
+            let category = "";
+            let tips = "";
+
+            if (bmi < 18.5) {
+                category = "Underweight";
+                tips = "You might need to gain weight. Ensure you're consuming enough calories and consider a balanced diet with adequate protein.";
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                category = "Normal weight";
+                tips = "Great! Keep up with a balanced diet and regular exercise to maintain your healthy weight.";
+            } else if (bmi >= 25 && bmi < 29.9) {
+                category = "Overweight";
+                tips = "Consider working on weight loss through exercise and a healthier diet to reduce health risks.";
+            } else {
+                category = "Obesity";
+                tips = "Consult a healthcare provider for advice on weight loss strategies and lifestyle changes.";
+            }
+
+            // Display the result
+            document.getElementById("bmiResult").textContent = `Your BMI is ${bmi.toFixed(2)}`;
+            document.getElementById("category").textContent = `Category: ${category}`;
+            document.getElementById("tips").textContent = `Tips: ${tips}`;
+        }
+
+        function resetFields() {
+            // Reset the input fields and results
+            document.getElementById("weight").value = "";
+            document.getElementById("height").value = "";
+            document.getElementById("bmiResult").textContent = "";
+            document.getElementById("category").textContent = "";
+            document.getElementById("tips").textContent = "";
+        }
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>jumack Tic Tac Toe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>jumack 🙋Tic Tac Toe</h1>
+    <div id="playerTurn">Current Player: <span>X</span></div>
+    <div class="board" id="board"></div>
+    <div id="message"></div>
+    <div id="scoreboard">
+      <p>Player X: <span id="scoreX">0</span> - Player O: <span id="scoreO">0</span></p>
+    </div>
+    <button id="restart">Restart</button>
+    <button id="toggleAI">Toggle AI</button>
+    <div id="gameHistory">
+      <h3>Game History:</h3>
+      <ul id="historyList"></ul>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+<script>
+const board = document.getElementById("board");
+const message = document.getElementById("message");
+const restartBtn = document.getElementById("restart");
+const toggleAI = document.getElementById("toggleAI");
+const playerTurn = document.getElementById("playerTurn").querySelector("span");
+const scoreX = document.getElementById("scoreX");
+const scoreO = document.getElementById("scoreO");
+const historyList = document.getElementById("historyList");
+
+let currentPlayer = "X";
+let cells = Array(9).fill("");
+let isGameOver = false;
+let aiEnabled = false;
+let playerScores = { X: 0, O: 0 };
+let gameHistory = [];
+
+const winPatterns = [
+  [0, 1, 2], [3, 4, 5], [6, 7, 8],
+  [0, 3, 6], [1, 4, 7], [2, 5, 8],
+  [0, 4, 8], [2, 4, 6]
+];
+
+// Sound effects (optional)
+const soundMove = new Audio('move.mp3'); 
+const soundWin = new Audio('win.mp3');
+const soundDraw = new Audio('draw.mp3');
+
+// Function to check if a player wins
+function checkWin() {
+  return winPatterns.some(pattern => {
+    return pattern.every(index => cells[index] === currentPlayer);
+  });
+}
+
+// Function to check if it's a draw
+function checkDraw() {
+  return cells.every(cell => cell !== "");
+}
+
+// Handle player clicks on cells
+function handleClick(index) {
+  if (cells[index] || isGameOver) return;
+
+  cells[index] = currentPlayer;
+  soundMove.play();  // Play sound for move
+  render();
+
+  if (checkWin()) {
+    message.textContent = `${currentPlayer} wins!`;
+    playerScores[currentPlayer]++;
+    soundWin.play();  // Play sound for win
+    isGameOver = true;
+    updateScore();
+    logHistory(`${currentPlayer} wins!`);
+  } else if (checkDraw()) {
+    message.textContent = "It's a draw!";
+    soundDraw.play();  // Play sound for draw
+    isGameOver = true;
+    logHistory("It's a draw!");
+  } else {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    playerTurn.textContent = currentPlayer;
+    if (aiEnabled && currentPlayer === "O") aiTurn();
+  }
+}
+
+// AI Turn for easy mode (random move)
+function aiTurn() {
+  const availableCells = cells.map((cell, index) => cell === "" ? index : null).filter(item => item !== null);
+  const randomMove = availableCells[Math.floor(Math.random() * availableCells.length)];
+  cells[randomMove] = "O";
+  render();
+  
+  if (checkWin()) {
+    message.textContent = "O wins!";
+    playerScores["O"]++;
+    soundWin.play();
+    isGameOver = true;
+    updateScore();
+    logHistory("O wins!");
+  } else if (checkDraw()) {
+    message.textContent = "It's a draw!";
+    soundDraw.play();
+    isGameOver = true;
+    logHistory("It's a draw!");
+  } else {
+    currentPlayer = "X";
+    playerTurn.textContent = currentPlayer;
+  }
+}
+
+// Render board and update the UI
+function render() {
+  board.innerHTML = "";
+  cells.forEach((cell, index) => {
+    const div = document.createElement("div");
+    div.className = "cell";
+    div.textContent = cell;
+    div.addEventListener("click", () => handleClick(index));
+    if (checkWinningPattern(index)) div.classList.add("winner");
+    board.appendChild(div);
+  });
+}
+
+// Check if the current cell is part of the winning pattern
+function checkWinningPattern(index) {
+  return winPatterns.some(pattern => pattern.includes(index) && pattern.every(i => cells[i] === currentPlayer));
+}
+
+// Reset the game
+function resetGame() {
+  currentPlayer = "X";
+  cells = Array(9).fill("");
+  isGameOver = false;
+  message.textContent = "";
+  render();
+  playerTurn.textContent = currentPlayer;
+}
+
+// Toggle AI feature
+function toggleAIPlay() {
+  aiEnabled = !aiEnabled;
+  toggleAI.textContent = aiEnabled ? "AI: ON" : "AI: OFF";
+  resetGame();
+}
+
+// Update the score display
+function updateScore() {
+  scoreX.textContent = playerScores.X;
+  scoreO.textContent = playerScores.O;
+}
+
+// Log game results in the history list
+function logHistory(result) {
+  const li = document.createElement("li");
+  li.textContent = result;
+  historyList.appendChild(li);
+}
+
+// Event listeners
+restartBtn.addEventListener("click", resetGame);
+toggleAI.addEventListener("click", toggleAIPlay);
+
+// Initialize the game
+render();
+
+</script>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f5f5f5;
+  margin-top: 50px;
+}
+
+.container {
+  max-width: 350px;
+  margin: auto;
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+#playerTurn {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  font-size: 2rem;
+  background-color: #fff;
+  border: 2px solid #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#message {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  margin-top: 10px;
+  margin-right: 5px;
+}
+
+#scoreboard {
+  font-size: 1.1rem;
+  margin-top: 10px;
+}
+
+#gameHistory {
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+#gameHistory ul {
+  list-style-type: none;
+}
+
+.winner {
+  background-color: lightgreen;
+}
+
+#toggleAI {
+  margin-left: 5px;
+  background-color: #17a2b8;
+}
+
+</style>
+<div id="followSection">
+  <button id="followBtn" onclick="toggleFollow()">Follow</button>
+  <img src="Leonardo_Phoenix_10_A_forlorn_robot_slumped_in_a_seated_positi_1.jpg"width="80"height="100"
+  </body>
+
+<!-- Settings Navigation -->
+<div id="settings-nav">
+  <h2>Settings</h2>
+  <ul>
+    <li><a href="#profile-settings">Profile</a></li>
+    <li><a href="#account-settings">Account</a></li>
+    <li><a href="#security-settings">Security</a></li>
+    <li><a href="#notifications-settings">Notifications</a></li>
+  </ul>
+</div>
+
+<!-- Profile Settings -->
+<div id="profile-settings">
+  <h3>Profile Settings</h3>
+  <form>
+    <label for="profile-name">Name:</label>
+    <input type="text" id="profile-name" />
+    <label for="profile-bio">Bio:</label>
+    <textarea id="profile-bio"></textarea>
+    <button>Save Changes</button>
+  </form>
+</div>
+
+<!-- Account Settings -->
+<div id="account-settings">
+  <h3>Account Settings</h3>
+  <form>
+    <label for="account-email">Email:</label>
+    <input type="email" id="account-email" />
+    <label for="account-password">Password:</label>
+    <input type="password" id="account-password" />
+    <button>Save Changes</button>
+  </form>
+</div>
+
+<!-- Security Settings -->
+<div id="security-settings">
+  <h3>Security Settings</h3>
+  <form>
+    <label for="security-two-factor">Two-Factor Authentication:</label>
+    <input type="checkbox" id="security-two-factor" />
+    <button>Save Changes</button>
+  </form>
+</div>
+
+<!-- Notifications Settings -->
+<div id="notifications-settings">
+  <h3>Notifications Settings</h3>
+  <form>
+    <label for="notifications-email">Email Notifications:</label>
+    <input type="checkbox" id="notifications-email" />
+    <button>Save Changes</button>
+  </form>
+</div>
+
+  <script>
+let viewingUsername = '';  // Set this when viewing another user's profile
+
+function toggleFollow() {
+  const token = localStorage.getItem(tokenKey);
+  const action = document.getElementById("followBtn").innerText === "Follow" ? "follow" : "unfollow";
+
+  fetch(`${API_BASE}/${action}/${viewingUsername}/`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  .then(res => res.json())
+  .then(() => checkFollowStatus());
+}
+
+function checkFollowStatus() {
+  const token = localStorage.getItem(tokenKey);
+  fetch(`${API_BASE}/follow-status/${viewingUsername}/`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  .then(res => res.json())
+  .then(data => {
+    const btn = document.getElementById("followBtn");
+    btn.innerText = data.is_following ? "Unfollow" : "Follow";
+  });
+}
+</script>
+<style>
+#followBtn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007BFF;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#followBtn:hover {
+  background-color: #0056b3;
+}
+</style>
+<!-- Modal Container -->
+<div id="followModal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close" onclick="closeFollowModal()">&times;</span>
+    <h2 id="followModalTitle">Followers</h2>
+    <div id="followList"></div>
+  </div>
+</div>
+<script>
+function openFollowModal(type) {
+  const token = localStorage.getItem(tokenKey);
+  const username = viewingUsername;  // The user whose profile you're viewing
+  const url = `${API_BASE}/${type}-list/${username}/`;  // You’ll create this API
+
+  document.getElementById("followModalTitle").innerText = type.charAt(0).toUpperCase() + type.slice(1);
+  document.getElementById("followModal").classList.remove("hidden");
+
+  fetch(url, { headers: { Authorization: `Bearer ${token}` } })
+    .then(res => res.json())
+    .then(users => {
+      const list = document.getElementById("followList");
+      list.innerHTML = "";
+
+      users.forEach(user => {
+        list.innerHTML += `
+          <div class="follow-user">
+            <img src="${user.avatar}" alt="avatar">
+            <div class="info">
+              <strong>${user.username}</strong><br>
+              <small>${user.bio || ''}</small>
+            </div>
+            <button onclick="toggleFollowUser('${user.username}', this)">
+              ${user.is_following ? "Unfollow" : "Follow"}
+            </button>
+          </div>
+        `;
+      });
+    });
+}
+
+function closeFollowModal() {
+  document.getElementById("followModal").classList.add("hidden");
+}
+
+function toggleFollowUser(username, btn) {
+  const token = localStorage.getItem(tokenKey);
+  const action = btn.innerText === "Follow" ? "follow" : "unfollow";
+
+  fetch(`${API_BASE}/${action}/${username}/`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` }
+  }).then(() => {
+    btn.innerText = action === "follow" ? "Unfollow" : "Follow";
+  });
+}
+</script>
+<!-- Buttons to Open Modal -->
+<p>
+  <a href="#" onclick="openFollowModal('followers')">Followers</a> | 
+  <a href="#" onclick="openFollowModal('following')">Following</a>
+</p>
+<style>
+.modal {
+  position: fixed;
+  z-index: 10;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex; justify-content: center; align-items: center;
+}
+
+.modal.hidden { display: none; }
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 16px;
+  overflow-y: auto;
+  max-height: 80vh;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.follow-user {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.follow-user img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.follow-user .info {
+  flex-grow: 1;
+}
+
+.follow-user button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+</style>
+<h3>Notifications</h3>
+<ul id="notificationList"></ul>
+<script>
+function loadNotifications() {
+  const token = localStorage.getItem(tokenKey);
+  fetch(`${API_BASE}/notifications/`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+    .then(res => res.json())
+    .then(notifs => {
+      const list = document.getElementById("notificationList");
+      list.innerHTML = "";
+      notifs.forEach(n => {
+        list.innerHTML += `<li>${n.message} <small>${n.created_at}</small></li>`;
+      });
+    });
+}
+
+</script>
+</div>
+
+</div>
+<script>
+function uploadTrack() {
+  const token = localStorage.getItem(tokenKey);
+  const formData = new FormData();
+  formData.append("title", document.getElementById("trackTitle").value);
+  const file = document.getElementById("trackFile").files[0];
+  if (!file) return alert("Please select a file.");
+  formData.append("audio", file);
+  formData.append("public", document.getElementById("trackPublic").checked);
+
+  fetch(`${API_BASE}/upload-track/`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData
+  })
+  .then(res => {
+    if (!res.ok) throw new Error("Upload failed");
+    return res.json();
+  })
+  .then(() => {
+    alert("Track uploaded!");
+    loadTracks();
+  })
+  .catch(err => alert(err.message));
+}
+<\script>
+
+<h3>Your Tracks</h3>
+<div id="trackList"></div>
+
+    </body>
+    <script>
+function uploadTrack() {
+  const token = localStorage.getItem(tokenKey);
+  const formData = new FormData();
+  formData.append("title", document.getElementById("trackTitle").value);
+  const file = document.getElementById("trackFile").files[0];
+  if (!file) return alert("Please select a file.");
+  formData.append("audio", file);
+
+  fetch(`${API_BASE}/upload-track/`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Track uploaded!");
+    loadTracks();
+  });
+}
+
+function loadTracks() {
+  const token = localStorage.getItem(tokenKey);
+  fetch(`${API_BASE}/my-tracks/`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+  .then(res => res.json())
+  .then(tracks => {
+    const list = document.getElementById("trackList");
+    list.innerHTML = "";
+    tracks.forEach(track => {
+      list.innerHTML += `
+        <p><strong>${track.title}</strong></p>
+        <audio controls src="${track.audio}"></audio>
+      `;
+    });
+  });
+}
+getProfile() {
+  ...
+  loadTracks();
+}
+
+    </script>
+
+  </div>
+  <button id="logoutBtn">Log Out</button>
+
+  <script>
+    const signupForm = document.getElementById("signupForm");
+    const loginForm = document.getElementById("loginForm");
+    const profileSection = document.getElementById("profile");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    let users = JSON.parse(localStorage.getItem("users") || "{}");
+
+    signupForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = signupForm.signupEmail.value;
+      const password = signupForm.signupPassword.value;
+      const bio = signupForm.signupBio.value;
+      const avatarFile = signupForm.signupAvatar.files[0];
+
+      if (users[email]) {
+        alert("User already exists!");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        users[email] = {
+          password,
+          bio,
+          avatar: event.target.result
+        };
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("User registered! Please log in.");
+        signupForm.reset();
+      };
+      if (avatarFile) reader.readAsDataURL(avatarFile);
+      else reader.onload({target: {result: ''}});
+    });
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = loginForm.loginEmail.value;
+      const password = loginForm.loginPassword.value;
+
+      if (!users[email] || users[email].password !== password) {
+        alert("Invalid credentials!");
+        return;
+      }
+
+      localStorage.setItem("currentUser", email);
+      showProfile(email);
+    });
+
+    logoutBtn.addEventListener("click", function() {
+      localStorage.removeItem("currentUser");
+      profileSection.style.display = "none";
+      logoutBtn.style.display = "none";
+      document.getElementById("authForms").style.display = "block";
+    });
+
+    function showProfile(email) {
+      const user = users[email];
+      document.getElementById("profileEmail").textContent = email;
+      document.getElementById("profileBio").textContent = user.bio;
+      document.getElementById("profileAvatar").src = user.avatar || "";
+      profileSection.style.display = "block";
+      logoutBtn.style.display = "block";
+      document.getElementById("authForms").style.display = "none";
+    }
+
+    // Auto login if already logged in
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser && users[currentUser]) {
+      showProfile(currentUser);
+    }
+  </script>
+<style>
+/* Resetting some basic styles for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Main container that holds all content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header section */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+/* Section for arranging elements like cards, forms, etc. */
+.section {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+/* Card layout inside section */
+.card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Button styling */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Form layout */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+form input,
+form textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    align-self: flex-start;
+    padding: 12px 25px;
+    background-color: #28a745;
+    border: none;
+}
+
+/* Footer section */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 1rem;
+    color: #777;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .section {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .card {
+        max-width: 100%;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 0.9rem;
+    }
+}
+
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boom Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 50px;
+    }
+    .calculator {
+      display: inline-block;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+    input, button {
+      margin: 5px;
+      padding: 10px;
+      width: 60px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" id="display" disabled><br>
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+    <button onclick="append('+')">+</button><br>
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+    <button onclick="append('-')">-</button><br>
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button onclick="append('*')">*</button><br>
+    <button onclick="append('0')">0</button>
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="calculate()">=</button>
+    <button onclick="append('/')">/</button>
+  </div>
+
+  <script>
+    function append(value) {
+      document.getElementById('display').value += value;
+    }
+
+    function clearDisplay() {
+      document.getElementById('display').value = '';
+    }
+
+    function calculate() {
+      try {
+        document.getElementById('display').value = eval(document.getElementById('display').value);
+      } catch {
+        alert('Invalid Expression');
+      }
+    }
+  </script>
+</body>
+</html>
+<h1>enjoy your self with unlimited experience on jumack</h1>
+<section class="media-grid">
+            <div class="media-card">
+                <img src="download (1).jpeg" alt="download (1)">
+                <h2>This is AI calculator bot which is of xplus brain</h2>
+                <p>jumack description</p>
+                <style>
+media-card {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.media-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+                </style>
+
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Boommack. All rights reserved.</p>
+    <ul class="social-links">
+      <li><a href="https://www.facebook.com" target="_facebook.com"><i class="fab fa-facebook-f"></i></a></li>
+      <li><a href="https://www.x.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
+      <li><a href="http://instragram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
+    </ul>
+  </div>
+</footer>
+<style>
+footer {
+  background-color: #888;
+  color: #f3f;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.social-links li {
+  margin-right: 20px;
+}
+
+.social-links a {
+  color: #fff;
+  transition: color 0.2s ease;
+}
+
+.social-links a:hover {
+  color: #ccc;
+}
+
+.fab {
+  font-size: 24px;
+}
+
+
+</style>
